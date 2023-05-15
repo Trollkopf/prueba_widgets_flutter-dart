@@ -57,6 +57,32 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _corazon,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.red,
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                  icon: Icon(
+                    Icons.add_location,
+                    color: Colors.white,
+                  ),
+                  onPressed: null
+              ),
+              IconButton(
+                  icon: Icon(
+                    Icons.forward,
+                    color: Colors.white,
+                  ),
+                  onPressed: null
+              ),
+            ],
+          ),
+        ),
+        shape: CircularNotchedRectangle(),
+      ),
     );
   }
 }
