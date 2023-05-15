@@ -28,9 +28,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //CONSTANTES/VARIABLES
   Icon _corazon = Icon(Icons.favorite, color: Colors.white);
   bool _likeBool = true;
+  int _indiceSeleccionado = 0;
+  String _visualizacion = "0: Inicio";
+  String etiquetaIconoNav = "Inicio";
 
+  //FUNCIONES
   void _likeThis() {
     setState(() {
       if (_likeBool) {
@@ -43,6 +48,30 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _itemPulsado(int index) {
+    setState(() {
+      _indiceSeleccionado = index;
+      switch(_indiceSeleccionado){
+        case 0:
+          {
+            _visualizacion = '$_indiceSeleccionado: Inicio';
+          }
+          break;
+        case 1:
+          {
+            _visualizacion = '$_indiceSeleccionado: Mi Cuenta';
+          }
+          break;
+        case 2:
+          {
+            _visualizacion = '$_indiceSeleccionado: Estadísticas';
+          }
+          break;
+      }
+    });
+  }
+
+  //SCAFFOLD
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,32 +85,75 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.red,
         child: _corazon,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.red,
-        child: Container(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    Icons.add_location,
-                    color: Colors.white,
-                  ),
-                  onPressed: null
+
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
               ),
-              IconButton(
-                  icon: Icon(
-                    Icons.forward,
-                    color: Colors.white,
-                  ),
-                  onPressed: null
+              label: String.fromEnvironment('Inicio'),
               ),
-            ],
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.supervised_user_circle,
+                color: Colors.white,
+              ),
+            label: String.fromEnvironment('Mi Cuenta'),
           ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.assessment,
+                color: Colors.white,
+              ),
+            label: String.fromEnvironment('Estadísticas'),
+          ),
+        ],
+        backgroundColor: Colors.red,
+        onTap: _itemPulsado,
+        currentIndex: _indiceSeleccionado,
+      ),
+
+      //  APPBAR CON BOTON DE LIKE AL CENTRO
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // bottomNavigationBar: BottomAppBar(
+      //   color: Colors.red,
+      //   child: Container(
+      //     height: 50,
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: <Widget>[
+      //         IconButton(
+      //             icon: Icon(
+      //               Icons.add_location,
+      //               color: Colors.white,
+      //             ),
+      //             onPressed: null
+      //         ),
+      //         IconButton(
+      //             icon: Icon(
+      //               Icons.forward,
+      //               color: Colors.white,
+      //             ),
+      //             onPressed: null
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      //   shape: CircularNotchedRectangle(),
+      // ),
+
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '${_visualizacion}',
+              style: TextStyle(color: Colors.red, fontSize: 40),
+            )
+          ],
         ),
-        shape: CircularNotchedRectangle(),
       ),
     );
   }
