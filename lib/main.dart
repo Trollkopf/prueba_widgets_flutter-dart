@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _itemPulsado(int index) {
     setState(() {
       _indiceSeleccionado = index;
-      switch(_indiceSeleccionado){
+      switch (_indiceSeleccionado) {
         case 0:
           {
             _visualizacion = '$_indiceSeleccionado: Inicio';
@@ -83,30 +83,30 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _likeThis,
         backgroundColor: Colors.red,
-        child: _corazon,
+        child: Icon(Icons.favorite_outline_sharp),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-              label: String.fromEnvironment('Inicio'),
-              ),
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            label: String.fromEnvironment('Inicio'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.supervised_user_circle,
-                color: Colors.white,
-              ),
+            icon: Icon(
+              Icons.supervised_user_circle,
+              color: Colors.white,
+            ),
             label: String.fromEnvironment('Mi Cuenta'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.assessment,
-                color: Colors.white,
-              ),
+            icon: Icon(
+              Icons.assessment,
+              color: Colors.white,
+            ),
             label: String.fromEnvironment('Estadísticas'),
           ),
         ],
@@ -152,6 +152,35 @@ class _MyHomePageState extends State<MyHomePage> {
               '${_visualizacion}',
               style: TextStyle(color: Colors.red, fontSize: 40),
             )
+          ],
+        ),
+      ),
+
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'Menú navegación',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
+              ),
+            ),
+            Text(
+              'Enlace 1',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Enlace 2',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Enlace 3',
+              style: TextStyle(fontSize: 18),
+            ),
+
           ],
         ),
       ),
