@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,10 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Like',
+      title: 'Demo Widgets Flutter',
       color: Colors.white,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MyHomePage(title: 'Like'),
+      home: MyHomePage(title: 'Detección de plataforma'),
     );
   }
 }
@@ -71,9 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  //SCAFFOLD
   @override
   Widget build(BuildContext context) {
+    return Platform.isIOS ? cupertino() : material();
+  }
+
+  //MATERIAL PARA ANDROID
+  @override
+  Widget material() {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -83,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _likeThis,
         backgroundColor: Colors.red,
-        child: Icon(Icons.favorite_outline_sharp),
+        child: const Icon(Icons.favorite_outline_sharp),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -149,14 +157,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '${_visualizacion}',
-              style: TextStyle(color: Colors.red, fontSize: 40),
+              _visualizacion,
+              style: const TextStyle(color: Colors.red, fontSize: 40),
             )
           ],
         ),
       ),
 
-      drawer: Drawer(
+      drawer: const Drawer(
         child: Column(
           children: <Widget>[
             DrawerHeader(
@@ -180,9 +188,42 @@ class _MyHomePageState extends State<MyHomePage> {
               'Enlace 3',
               style: TextStyle(fontSize: 18),
             ),
-
           ],
         ),
+      ),
+    );
+  }
+
+
+  // CUPERTINO PARA IOS
+  Widget cupertino() {
+    return CupertinoPageScaffold(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'estilo Cupertino',
+              style: TextStyle(fontSize: 20, decoration: TextDecoration.none),
+            )
+          ],
+        ),
+      ),
+      navigationBar: CupertinoNavigationBar(
+        leading: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
+        ),
+        automaticallyImplyLeading: true,
+        middle: Text(
+          widget.title,
+          style: TextStyle(color: Colors.white),
+        ),
+        trailing: Icon(
+          Icons.add_shopping_cart,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.red,
       ),
     );
   }
